@@ -1,7 +1,7 @@
 /* @import url("https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400,500,600,700,800"); */
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 /* overrides for desktop-first */
 .container {
