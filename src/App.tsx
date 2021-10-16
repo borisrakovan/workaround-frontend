@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router"
 import ApplyScreen from "./apply/ApplyScreen"
 import AboutUs from "./components/AboutUs"
 import Home from "./components/home/Home"
+import { LoginScreen } from "./components/LoginScreen"
 import MapScreen from "./components/MapScreen"
 import MapLayout from "./layout/MapLayout"
 import PlainLayout from "./layout/PlainLayout"
@@ -17,6 +18,9 @@ function App() {
          <Switch>
             <PublicRoute path="/about">
                <AboutUs />
+            </PublicRoute>
+            <PublicRoute path="/login">
+               <LoginScreen />
             </PublicRoute>
             <PrivateRoute path="/apply">
                <ApplyScreen />

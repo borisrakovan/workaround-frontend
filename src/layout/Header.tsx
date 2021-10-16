@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useAuthContext } from "../context/AuthContext"
 import WorkaroundLogo from "../WorkaroundLogo"
 import HeaderMenuItem from "./HeaderMenuItem"
 import HeaderMenuSeparator from "./HeaderMenuSeparator"
@@ -8,7 +9,7 @@ import UserDropdownMenu from "./UserDropdownMenu"
 interface Props {}
 
 const Header = (props: Props) => {
-   const currentUser = null
+   const { currentUser } = useAuthContext()
    const userLoading = false
 
    const handleLogout = () => {}
@@ -37,7 +38,7 @@ const Header = (props: Props) => {
                      </>
                   ) : (
                      <>
-                        <HeaderMenuItem linkTo="/my-materials">
+                        <HeaderMenuItem linkTo="/my-applications">
                            My applications
                         </HeaderMenuItem>
                         <HeaderMenuSeparator />

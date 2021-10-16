@@ -8,6 +8,7 @@ import { BACKEND_URL } from "./urls"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
+import AuthContextProvider from "./context/AuthContext"
 
 const client = new ApolloClient({
    // uri: "http://localhost:8000/graphql/",
@@ -52,7 +53,9 @@ ReactDOM.render(
       <React.StrictMode>
          <BrowserRouter>
             <ThemeProvider theme={theme}>
-               <App />
+               <AuthContextProvider>
+                  <App />
+               </AuthContextProvider>
             </ThemeProvider>
          </BrowserRouter>
       </React.StrictMode>
