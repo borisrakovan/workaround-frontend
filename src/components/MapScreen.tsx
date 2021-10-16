@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useProperties } from "../graphql/queries"
 import { PropertyType } from "../types/generated"
 import Map from "./Map"
 // import { divIcon } from "leaflet"
@@ -11,6 +12,8 @@ const MapScreen = (props: Props) => {
    const [selectedProperty, setSelectedProperty] = useState<PropertyType | undefined>(
       undefined
    )
+
+   const { data, loading } = useProperties()
 
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -25,8 +28,12 @@ const MapScreen = (props: Props) => {
    // })
 
    return (
-      <div style={{ width: "100vw", height: "100vh" }}>
-         <Map whenCreated={setMap} />
+      <div className="h-full relative">
+         <Map
+            whenCreated={setMap}
+            onMarkerClick={setSelectedProperty}
+            displayedProperties={data?.closestProperties}
+         />
          <div className="absolute top-10 right-10 z-10 flex">
             <PropertyCard property={selectedProperty} />
          </div>

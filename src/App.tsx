@@ -3,6 +3,7 @@ import React from "react"
 import { Route, Switch } from "react-router"
 import Home from "./components/home/Home"
 import MapScreen from "./components/MapScreen"
+import MapLayout from "./layout/MapLayout"
 import PlainLayout from "./layout/PlainLayout"
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
                </PlainLayout>
             </Route>
             <Route exact path="/map">
-               <PlainLayout>
+               <MapLayout>
                   <MapScreen />
-               </PlainLayout>
+               </MapLayout>
             </Route>
          </Switch>
       </div>

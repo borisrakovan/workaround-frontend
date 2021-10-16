@@ -4,13 +4,14 @@ import { PropertyType } from "../types/generated"
 interface Props {
    whenCreated: any
    displayedProperties?: PropertyType[]
+   onMarkerClick: (property: PropertyType) => void
 }
 
 const Map = (props: Props) => {
-   const { whenCreated } = props
+   const { whenCreated, displayedProperties } = props
 
    return (
-      <div style={{ width: "100vw", height: "100vh" }} className="z-0 relative">
+      <div className="z-0 w-full h-full relative">
          <MapContainer
             zoom={13}
             scrollWheelZoom={false}
@@ -18,14 +19,14 @@ const Map = (props: Props) => {
             whenCreated={whenCreated}
          >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker
-               //    icon={customMarkerIcon}
-               position={[50.0764415, 14.402335]}
-            >
-               <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-               </Popup>
-            </Marker>
+            {displayedProperties?.map((property) => (
+               <Marker
+                  position={[
+                     (property.coordinates as any).coordinates[0],
+                     (property.coordinates as any).coordinates[1],
+                  ]}
+               />
+            ))}
          </MapContainer>
       </div>
    )
