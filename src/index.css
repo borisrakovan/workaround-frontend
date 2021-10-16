@@ -197,7 +197,7 @@ a,
 }
 
 .btn-menu {
-   @apply btn-dark text-base;
+   @apply btn-dark text-base font-normal;
 }
 .btn-menu.strong {
    @apply text-gray-dark font-bold;
@@ -413,4 +413,38 @@ input[type="password"] {
 
 textarea {
    @apply bg-white text-sm px-4 py-2 border-gray border shadow-sm focus:outline-none tracking-wider;
+}
+
+.overlay-popup {
+   @apply shadow z-50 bg-white absolute;
+}
+
+/* animations */
+.flash-enter {
+   opacity: 0.01;
+}
+
+.flash-enter-active {
+   opacity: 1;
+   transition: opacity 500ms ease-in;
+}
+
+.overlay-anim-enter {
+   opacity: 0;
+   transform: scale(0.9);
+}
+
+.overlay-anim-enter-active {
+   opacity: 1;
+   transform: translateX(0);
+   transition: opacity 300ms, transform 300ms;
+}
+
+.overlay-anim-exit {
+   opacity: 1;
+}
+.overlay-anim-exit-active {
+   opacity: 0;
+   transform: scale(0.9);
+   transition: opacity 300ms, transform 300ms;
 }

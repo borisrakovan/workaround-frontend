@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
 import WorkaroundLogo from "../WorkaroundLogo"
 import HeaderMenuItem from "./HeaderMenuItem"
@@ -9,11 +9,12 @@ import UserDropdownMenu from "./UserDropdownMenu"
 interface Props {}
 
 const Header = (props: Props) => {
-   const { currentUser } = useAuthContext()
-   const userLoading = false
+   const { currentUser, userLoading } = useAuthContext()
+   const history = useHistory()
+   const handleLogout = () => history.push("/")
 
-   const handleLogout = () => {}
-
+   console.log(userLoading)
+   console.log(currentUser)
    return (
       <header className={`site-header z-10 py-3 flex items-center shadow w-full`}>
          <div className="flex items-center justify-between w-full">

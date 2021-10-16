@@ -39,11 +39,11 @@ module.exports = {
          // yellow: {
          //    DEFAULT: "#ffca28",
          // },
-         // red: {
-         //    DEFAULT: "#f44336",
-         //    light: "#F9928B",
-         //    lightest: "#F44336",
-         // },
+         red: {
+            DEFAULT: "#f44336",
+            light: "#F9928B",
+            lightest: "#F44336",
+         },
          gray: {
             // light: "#E0E0E0",
             lightest: "#f5f5f5",

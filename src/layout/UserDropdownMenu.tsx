@@ -3,15 +3,15 @@ import ProfilePicture from "../components/ProfilePicture"
 import { OverlayMenuOption } from "../types"
 import UserDropdownMenuContent from "./UserDropdownMenuContent"
 import { ReactComponent as IconMore } from "../assets/icons/expand_more-24px.svg"
+import { UserType } from "../types/generated"
 
 interface Props {
-   currentUser: any
+   currentUser: UserType
    onLogout: () => void
 }
 
 export const userDropdownMenuOptions = (
-   onLogout: () => void,
-   currentUser: any
+   onLogout: () => void
 ): OverlayMenuOption[] => [
    {
       label: "Edit profile",
@@ -37,7 +37,7 @@ const UserDropdownMenu = (props: Props) => {
       setShowUserMenu((old) => !old)
    }
 
-   const options = userDropdownMenuOptions(onLogout, currentUser)
+   const options = userDropdownMenuOptions(onLogout)
 
    return (
       <div className="">
@@ -48,13 +48,7 @@ const UserDropdownMenu = (props: Props) => {
          >
             <ProfilePicture user={currentUser} size={9} />
             <span className="inline-block ml-3 mr-2">
-               Hi,{" "}
-               {
-                  // show username if the fullname isn't set
-                  currentUser?.fullName
-                     ? currentUser?.fullName?.split(" ")[0]
-                     : currentUser?.name
-               }
+               Hi, {currentUser?.firstName}
             </span>
             <IconMore width={18} height={18} />
          </button>

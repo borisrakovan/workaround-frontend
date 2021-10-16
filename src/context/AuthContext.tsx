@@ -2,8 +2,7 @@ import { useMutation } from "@apollo/client"
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useLocation } from "react-router"
 import { LOGIN } from "../graphql/mutations"
-
-interface UserType {}
+import { UserType } from "../types/generated"
 
 interface AuthContextType {
    currentUser: UserType | null
@@ -39,6 +38,7 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
          } else {
             return Promise.reject("API response does not contain any user")
          }
+         setUserLoading(false)
       })
 
    const logout = () => setCurrentUser(null)
@@ -50,6 +50,8 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
    //    })
    // }, [])
 
+   console.log(currentUser)
+
    return (
       <AuthContext.Provider value={{ currentUser, userLoading, login, logout }}>
          {children}
@@ -59,7 +61,6 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
 
 // only a shortcut
 export const useAuthContext = () => useContext<AuthContextType>(AuthContext)
-
 export const useLoginRequired = (fn: any) => {
    const { currentUser } = useAuthContext()
    const history = useHistory()
