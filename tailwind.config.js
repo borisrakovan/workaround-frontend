@@ -46,7 +46,7 @@ module.exports = {
          // },
          gray: {
             // light: "#E0E0E0",
-            // lightest: "#f5f5f5",
+            lightest: "#f5f5f5",
             DEFAULT: "#BFC0C0",
             dark: "#424242",
          },
@@ -55,6 +55,7 @@ module.exports = {
          },
          orange: {
             DEFAULT: "#EF8354",
+            dark: "#EC6A32",
          },
          blue: {
             DEFAULT: "#2D3142",
