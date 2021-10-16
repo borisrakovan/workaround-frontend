@@ -9,8 +9,12 @@ const PROPERTIES = gql`
             id
          }
          usdWorth
+         photoId
          distance
-         coordinates
+         coordinates {
+            x
+            y
+         }
       }
    }
 `

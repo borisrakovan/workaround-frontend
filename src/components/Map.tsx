@@ -26,10 +26,7 @@ const Map = (props: Props) => {
                         onMarkerClick(property)
                      },
                   }}
-                  position={[
-                     (property.coordinates as any).coordinates[0],
-                     (property.coordinates as any).coordinates[1],
-                  ]}
+                  position={[property.coordinates.x, property.coordinates.y]}
                />
             ))}
          </MapContainer>

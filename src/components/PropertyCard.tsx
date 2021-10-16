@@ -6,6 +6,11 @@ import {
    CardActions,
    Button,
    Skeleton,
+   ListItem,
+   ListItemAvatar,
+   Avatar,
+   ListItemText,
+   List,
 } from "@mui/material"
 import { PropertyType } from "../types/generated"
 
@@ -19,7 +24,7 @@ const PropertyCard = (props: Props) => {
    const { property, loading, onClose } = props
    if (loading) {
       return (
-         <Card sx={{ maxWidth: 345, maxHeight: "95vh" }}>
+         <Card sx={{ width: 345, maxHeight: "95vh" }}>
             <Skeleton variant="rectangular" width={210} height={118} />
             <CardContent>
                <Skeleton />
@@ -34,11 +39,11 @@ const PropertyCard = (props: Props) => {
       )
    } else {
       return (
-         <Card sx={{ maxWidth: 345, maxHeight: "95vh" }}>
+         <Card sx={{ width: 345, maxHeight: "95vh" }}>
             <CardMedia
                component="img"
                height="140"
-               image="/img/hubpraha-d10-intro.jpg"
+               image={`/img/properties/${property.photoId}`}
                alt="green iguana"
             />
             <CardContent>
@@ -48,6 +53,14 @@ const PropertyCard = (props: Props) => {
                <Typography variant="body2" color="text.secondary">
                   {/* {property.user} */}
                </Typography>
+               <List>
+                  <ListItem alignItems="flex-start">
+                     <ListItemAvatar>
+                        <Avatar>JJ</Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary="Brunch this weekend?" />
+                  </ListItem>
+               </List>
             </CardContent>
             <CardActions>
                <Button size="small" onClick={onClose}>
