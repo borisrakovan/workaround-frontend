@@ -49,6 +49,10 @@ button {
    @apply text-left focus:outline-none;
 }
 
+.leaflet-container {
+   height: 100%;
+   width: 100%;
+}
 /* footer & header */
 .nav-logo {
    position: absolute;
