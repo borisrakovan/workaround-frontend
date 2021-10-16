@@ -48,3 +48,37 @@ p {
 button {
    @apply text-left focus:outline-none;
 }
+
+/* footer & header */
+.nav-logo {
+   position: absolute;
+   top: 1px;
+   left: 0px;
+}
+
+.site-header {
+   height: 4.375rem; /* 70px */
+}
+
+.overlay {
+   @apply h-full fixed z-50 left-0 top-0 bg-white overflow-x-hidden;
+   width: 0;
+   transition: width 0.2s ease-out;
+}
+
+.site-footer h4 {
+   @apply text-lg mb-3 md:mb-1;
+}
+
+.site-footer li {
+   @apply my-1 md:inline-block;
+}
+
+.site-footer .separator {
+   @apply hidden md:inline text-lg;
+}
+
+.separator::after {
+   content: "|";
+   @apply mx-2;
+}

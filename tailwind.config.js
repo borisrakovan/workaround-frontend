@@ -35,31 +35,39 @@ module.exports = {
          //    // DEFAULT with 0.4 opacity
          //    light: "#99d5db",
          // },
-         yellow: {
-            DEFAULT: "#ffca28",
-         },
-         red: {
-            DEFAULT: "#f44336",
-            light: "#F9928B",
-            lightest: "#F44336",
-         },
+
+         // yellow: {
+         //    DEFAULT: "#ffca28",
+         // },
+         // red: {
+         //    DEFAULT: "#f44336",
+         //    light: "#F9928B",
+         //    lightest: "#F44336",
+         // },
          gray: {
-            light: "#E0E0E0",
-            lightest: "#f5f5f5",
-            DEFAULT: "#9e9e9e",
+            // light: "#E0E0E0",
+            // lightest: "#f5f5f5",
+            DEFAULT: "#BFC0C0",
             dark: "#424242",
          },
          white: {
             DEFAULT: "#ffffff",
          },
-         green: {
-            DEFAULT: "#00A761",
+         orange: {
+            DEFAULT: "#EF8354",
          },
+         blue: {
+            DEFAULT: "#2D3142",
+            light: "#4F5D75",
+         },
+
+         // green: {
+         //    DEFAULT: "#00A761",
+         // },
       },
       fontFamily: {
-         sans: ["Raleway", "Roboto", "sans-serif"],
+         sans: ["Roboto", "Helvetica", "Arial", "sans-serif"],
       },
-
       extend: {},
    },
    corePlugins: {
