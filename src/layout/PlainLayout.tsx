@@ -11,7 +11,7 @@ const PlainLayout = (props: Props) => {
    return (
       <>
          <Header />
-         <div className="site-content flex-1 z-0">{children}</div>
+         <div className="site-content flex-1 z-0 ">{children}</div>
          <Footer />
       </>
    )

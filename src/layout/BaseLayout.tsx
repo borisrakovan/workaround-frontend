@@ -13,8 +13,8 @@ const BaseLayout = (props: Props) => {
    return (
       <>
          <Header />
-         <div className="site-content flex-1">
-            <div className="container my-10">
+         <div className="site-content flex-1 ">
+            <div className="container my-10 ">
                {/* {message && (
                   <div className="my-6">
                      <MutationResultMessage
