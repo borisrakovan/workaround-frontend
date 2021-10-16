@@ -1,7 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
+import { PropertyType } from "../types/generated"
 
 interface Props {
    whenCreated: any
+   displayedProperties?: PropertyType[]
 }
 
 const Map = (props: Props) => {
