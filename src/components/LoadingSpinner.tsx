@@ -39,7 +39,7 @@ const LoadingSpinner = (props: Props) => {
             color={
                invertColor
                   ? twConfig.theme.colors.white
-                  : twConfig.theme.colors.cyan.DEFAULT
+                  : twConfig.theme.colors.blue.DEFAULT
             }
             loading={true}
          />

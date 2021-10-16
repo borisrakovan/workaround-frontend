@@ -14,10 +14,10 @@ const Header = (props: Props) => {
    const handleLogout = () => {}
 
    return (
-      <header className={`site-header-10 py-3 flex items-center shadow w-full`}>
+      <header className={`site-header z-10 py-3 flex items-center shadow w-full`}>
          <div className="flex items-center justify-between w-full">
             <div className="px-2">
-               <Link to="/">
+               <Link to="/" className="hover:no-underline">
                   <WorkaroundLogo />
                </Link>
             </div>
