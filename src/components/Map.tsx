@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Map = (props: Props) => {
-   const { whenCreated, displayedProperties } = props
+   const { whenCreated, displayedProperties, onMarkerClick } = props
 
    return (
       <div className="z-0 w-full h-full relative">
@@ -21,6 +21,11 @@ const Map = (props: Props) => {
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {displayedProperties?.map((property) => (
                <Marker
+                  eventHandlers={{
+                     click: (e) => {
+                        onMarkerClick(property)
+                     },
+                  }}
                   position={[
                      (property.coordinates as any).coordinates[0],
                      (property.coordinates as any).coordinates[1],

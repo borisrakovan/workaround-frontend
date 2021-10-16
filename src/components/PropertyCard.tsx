@@ -10,12 +10,14 @@ import {
 import { PropertyType } from "../types/generated"
 
 interface Props {
-   property?: PropertyType
+   property: PropertyType
+   loading?: boolean
+   onClose?: () => void
 }
 
 const PropertyCard = (props: Props) => {
-   const { property } = props
-   if (!property) {
+   const { property, loading, onClose } = props
+   if (loading) {
       return (
          <Card sx={{ maxWidth: 345, maxHeight: "95vh" }}>
             <Skeleton variant="rectangular" width={210} height={118} />
@@ -24,7 +26,9 @@ const PropertyCard = (props: Props) => {
                <Skeleton width="60%" />
             </CardContent>
             <CardActions>
-               <Button size="small">Close</Button>
+               <Button size="small" onClick={onClose}>
+                  Close
+               </Button>
             </CardActions>
          </Card>
       )
@@ -42,11 +46,13 @@ const PropertyCard = (props: Props) => {
                   {property.id}
                </Typography>
                <Typography variant="body2" color="text.secondary">
-                  {property.user}
+                  {/* {property.user} */}
                </Typography>
             </CardContent>
             <CardActions>
-               <Button size="small">Close</Button>
+               <Button size="small" onClick={onClose}>
+                  Close
+               </Button>
             </CardActions>
          </Card>
       )

@@ -31,12 +31,18 @@ const MapScreen = (props: Props) => {
       <div className="h-full relative">
          <Map
             whenCreated={setMap}
-            onMarkerClick={setSelectedProperty}
+            onMarkerClick={(a) => setSelectedProperty(a)}
             displayedProperties={data?.closestProperties}
          />
-         <div className="absolute top-10 right-10 z-10 flex">
-            <PropertyCard property={selectedProperty} />
-         </div>
+         {selectedProperty && (
+            <div className="absolute top-10 right-10 z-10 flex">
+               <PropertyCard
+                  property={selectedProperty}
+                  loading={loading}
+                  onClose={() => setSelectedProperty(undefined)}
+               />
+            </div>
+         )}
       </div>
    )
 }
