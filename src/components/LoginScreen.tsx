@@ -37,7 +37,7 @@ export const LoginScreen = (props: Props) => {
    return (
       <div className="row">
          <div className="col-span-6 col-start-4">
-            {error && <p className="red text-red">{error}</p>}
+            {error && <p className="text-red">{error}</p>}
             <div className="">
                <Formik
                   initialValues={{

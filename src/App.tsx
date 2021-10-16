@@ -3,6 +3,7 @@ import React from "react"
 import { Route, Switch } from "react-router"
 import ApplyScreen from "./apply/ApplyScreen"
 import AboutUs from "./components/AboutUs"
+import MyApplications from "./components/applications/MyApplications"
 import Home from "./components/home/Home"
 import { LoginScreen } from "./components/LoginScreen"
 import MapScreen from "./components/MapScreen"
@@ -24,6 +25,9 @@ function App() {
             </PublicRoute>
             <PrivateRoute path="/apply">
                <ApplyScreen />
+            </PrivateRoute>
+            <PrivateRoute path="/my-applications">
+               <MyApplications />
             </PrivateRoute>
             <Route exact path="/">
                <PlainLayout>

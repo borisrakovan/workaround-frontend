@@ -40,7 +40,7 @@ const OverlayMenu = (props: Props) => {
                         <Link
                            to={o.linkTo}
                            className={`btn-user-menu font-normal ${
-                              o.red ? "red" : ""
+                              o.red ? "text-red" : ""
                            }`}
                         >
                            {o.label}

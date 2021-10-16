@@ -1,10 +1,14 @@
 import { Form, Formik } from "formik"
-import React from "react"
+import React, { useState } from "react"
 import * as Yup from "yup"
+import CheckboxFormControl from "../components/forms/CheckboxFormControl"
+import DateFormControl from "../components/forms/DateFormControl"
 import InputFormControl from "../components/forms/InputFormControl"
 import SelectFormControl from "../components/forms/SelectFormControl"
 import { useAuthContext } from "../context/AuthContext"
+import { usePropertyParameters } from "../hooks/usePropertyParameters"
 import { SelectOption } from "../types"
+import { UserType } from "../types/generated"
 
 interface Props {}
 
@@ -57,16 +61,23 @@ const lengthOfStayOptions: SelectOption[] = [
 ]
 
 const ApplyScreen = (props: Props) => {
-   const { currentUser } = useAuthContext()
+   const { currentUser } = useAuthContext() as { currentUser: UserType }
+   const [deadline, setDeadline] = useState<Date | null>(null)
+
+   const { lifeStyleTypes, facilityTypes, lengthsOfStay, roomTypes } =
+      usePropertyParameters()
+
+   console.log(usePropertyParameters())
+
    const handleSubmit = (values: ApplicationValues) => {
       console.log(values)
       return Promise.resolve()
    }
 
    const initialValues: ApplicationValues = {
-      userId: "1",
-      fullName: "",
-      email: "",
+      userId: currentUser.id,
+      fullName: currentUser.firstName + " " + currentUser.lastName,
+      email: currentUser.email,
       occupation: "",
       monthlyIncome: 0,
 
@@ -83,6 +94,7 @@ const ApplyScreen = (props: Props) => {
       offeredRoomCount: "",
       offeredPropertyPrice: 0,
       offeredPropertyCoordinates: null,
+
       preferredCities: [],
       preferredLifestyleTypes: [],
       preferredCommuteTypes: [],
@@ -118,7 +130,6 @@ const ApplyScreen = (props: Props) => {
                   <h1>Step 1: Personal information</h1>
                   <h1>Step 2: General stay information</h1>
                   <h1>Step 3: Offered property</h1>
-                  <h1>Step 3: property preferences</h1>
 
                   <div className="row">
                      <div className="pb-4 col-span-6">
@@ -164,7 +175,26 @@ const ApplyScreen = (props: Props) => {
                            type="number"
                         />
                      </div>
+                     <div className="col-span-6">
+                        <CheckboxFormControl
+                           label={<>Pet friendly</>}
+                           name="petFriendly"
+                        />
+                     </div>
+                     <div className="col-span-6">
+                        <DateFormControl
+                           label="Move in date"
+                           selectedDate={deadline}
+                           setSelectedDate={setDeadline}
+                        />
+                     </div>
                   </div>
+                  <h1>Step 3: property preferences</h1>
+
+                  <div className="row">
+                     <div className="col-span-6"></div>
+                  </div>
+
                   <button type="submit" className={`btn-lg-orange`} disabled={false}>
                      Submit application
                   </button>

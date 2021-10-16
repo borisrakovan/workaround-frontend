@@ -13,14 +13,14 @@ interface Props {
 export const userDropdownMenuOptions = (
    onLogout: () => void
 ): OverlayMenuOption[] => [
-   {
-      label: "Edit profile",
-      linkTo: "/edit-profile",
-   },
-   {
-      label: "Settings",
-      linkTo: "/account-settings",
-   },
+   // {
+   //    label: "Edit profile",
+   //    linkTo: "/edit-profile",
+   // },
+   // {
+   //    label: "Settings",
+   //    linkTo: "/account-settings",
+   // },
    {
       label: "Log Out",
       onClick: onLogout,
