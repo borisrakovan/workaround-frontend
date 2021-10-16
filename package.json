@@ -43,7 +43,7 @@
       "build": "craco build",
       "test": "craco test",
       "eject": "react-scripts eject",
-      "generate-interfaces": "sgts -e http://localhost:8000/graphql/ -o ./src/types/generated.ts"
+      "generate-interfaces": "sgts -e http://10.12.202.69:8000/graphql/ -o ./src/types/generated.ts"
    },
    "eslintConfig": {
       "extends": [
