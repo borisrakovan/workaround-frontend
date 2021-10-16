@@ -1,22 +1,26 @@
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material"
+import {
+   Card,
+   CardActionArea,
+   CardContent,
+   Typography,
+   CardMedia,
+   CardActions,
+   Button,
+} from "@mui/material"
 import { LatLngExpression } from "leaflet"
 import React, { useEffect, useState } from "react"
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
+import Map from "./Map"
+
 import { divIcon } from "leaflet"
 
 interface Props {}
 
 const MapScreen = (props: Props) => {
-   const [coords, setCoords] = useState<LatLngExpression>([51.505, -0.09])
-
    const [map, setMap] = useState<any>(null)
-
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(function (position) {
          if (map) {
             map.setView([position.coords.latitude, position.coords.longitude], 13)
-            setCoords([position.coords.latitude, position.coords.longitude])
-            console.log([position.coords.latitude, position.coords.longitude])
          }
       })
    }, [map])
@@ -27,38 +31,27 @@ const MapScreen = (props: Props) => {
 
    return (
       <div style={{ width: "100vw", height: "100vh" }}>
-         <div style={{ width: "100vw", height: "100vh" }} className="z-0 relative">
-            <MapContainer
-               zoom={13}
-               scrollWheelZoom={false}
-               center={[10, 10]}
-               whenCreated={setMap}
-            >
-               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-               <Marker
-                  //    icon={customMarkerIcon}
-                  position={[50.0764415, 14.402335]}
-               >
-                  <Popup>
-                     A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-               </Marker>
-            </MapContainer>
-         </div>
-         <div className="absolute top-5 right-10 text-red z-10">
-            {" "}
-            <Card sx={{ maxWidth: 345, height: "95vh" }}>
-               <CardActionArea>
-                  <CardContent>
-                     <Typography gutterBottom variant="h5" component="div">
-                        Lizard
-                     </Typography>
-                     <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over
-                        6,000 species, ranging across all continents except Antarctica
-                     </Typography>
-                  </CardContent>
-               </CardActionArea>
+         <Map whenCreated={setMap} />
+         <div className="absolute top-10 right-10 z-10 flex">
+            <Card sx={{ maxWidth: 345, maxHeight: "95vh" }}>
+               <CardMedia
+                  component="img"
+                  height="140"
+                  image="/img/hubpraha-d10-intro.jpg"
+                  alt="green iguana"
+               />
+               <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                     ImpactHub
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                     Lizards are a widespread group of squamate reptiles, with over
+                     6,000 species, ranging across all continents except Antarctica
+                  </Typography>
+               </CardContent>
+               <CardActions>
+                  <Button size="small">Close</Button>
+               </CardActions>
             </Card>
          </div>
       </div>
