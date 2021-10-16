@@ -5,7 +5,7 @@ interface Props {}
 
 const Header = (props: Props) => {
    return (
-      <header>
+      <header className="absolute w-full z-10">
          <div className="flex items-center justify-between">
             <div>
                <WorkaroundLogo />
