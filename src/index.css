@@ -53,6 +53,7 @@ button {
    height: 100%;
    width: 100%;
 }
+
 /* footer & header */
 .nav-logo {
    position: absolute;
@@ -132,6 +133,10 @@ h4 {
    @apply font-normal text-gray-dark text-base;
 }
 
+a,
+.btn-like-a {
+   @apply text-blue-light font-medium tracking-wide hover:text-blue hover:underline;
+}
 .btn-gray-dark {
    @apply py-1 px-8 text-xs inline-block tracking-wide bg-gray-dark text-orange rounded-md hover:no-underline hover:text-orange;
 }
@@ -183,11 +188,6 @@ h4 {
 .btn-lg-blue:disabled,
 .btn-blue:disabled {
    @apply bg-gray cursor-not-allowed;
-}
-
-a,
-.btn-like-a {
-   @apply text-blue-light font-medium tracking-wide hover:text-blue hover:underline;
 }
 
 .btn-dark {
