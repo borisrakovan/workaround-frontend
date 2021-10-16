@@ -14,7 +14,9 @@ const Header = (props: Props) => {
    const handleLogout = () => {}
 
    return (
-      <header className={`site-header absolute z-10 py-3 flex items-center shadow`}>
+      <header
+         className={`site-header absolute z-10 py-3 flex items-center shadow w-full`}
+      >
          <div className="flex items-center justify-between w-full">
             <div className="px-2">
                <Link to="/">

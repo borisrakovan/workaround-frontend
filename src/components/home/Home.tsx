@@ -1,5 +1,6 @@
 import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon"
 import React from "react"
+import { Link } from "react-router-dom"
 import WorkaroundLogo from "../../WorkaroundLogo"
 import LogoHolder from "./LogoHolder"
 
@@ -34,9 +35,9 @@ const Home = (props: Props) => {
                         properties with others from all around the world.
                      </p>
                      <div className="py-2">
-                        <button type="button" className="btn-lg-orange">
+                        <Link to="/apply" className="btn-lg-orange">
                            Apply now
-                        </button>
+                        </Link>
                      </div>
 
                      {/* <div className="my-6">
