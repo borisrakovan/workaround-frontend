@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material"
 import React from "react"
 import { Route, Switch } from "react-router"
-import Home from "./components/Home"
+import Home from "./components/home/Home"
 import MapScreen from "./components/MapScreen"
 import PlainLayout from "./layout/PlainLayout"
 
