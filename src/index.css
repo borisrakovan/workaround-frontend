@@ -266,11 +266,11 @@ a,
 
 input[type="checkbox"],
 input[type="radio"] {
-   --active: #0097a7;
+   --active: #4f5d75;
    --active-inner: #fff;
-   --focus: 1px #00838f;
+   --focus: 1px #4f5d75;
    --border: #e0e0e0;
-   --border-hover: #00838f;
+   --border-hover: #4f5d75;
    --background: #fff;
    --disabled: #9e9e9e;
    --disabled-inner: #9e9e9e;
@@ -451,4 +451,71 @@ textarea {
    opacity: 0;
    transform: scale(0.9);
    transition: opacity 300ms, transform 300ms;
+}
+
+.react-calendar__navigation__label {
+   @apply flex justify-center items-center;
+}
+
+.react-calendar__navigation button[disabled] {
+   @apply bg-white;
+}
+
+.react-calendar__navigation__arrow {
+   @apply flex items-center justify-center;
+}
+
+.react-calendar__tile--now,
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+   @apply bg-orange;
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd,
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+   @apply bg-blue-light;
+}
+
+.modal-base {
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   position: absolute;
+   background-color: #fff;
+   -webkit-overflow-scrolling: touch;
+   outline: none;
+}
+
+.modal {
+   padding: 40px;
+   max-height: 80vh;
+   overflow: auto;
+   overflow-y: auto;
+   @apply modal-base border border-gray w-4/5 max-w-2xl xs:py-6 xs:px-4;
+}
+
+.modal-no-overflow {
+   padding: 40px;
+   max-height: 80vh;
+   @apply modal-base border border-gray w-4/5 max-w-2xl xs:py-6 xs:px-4;
+}
+
+.ReactModal__Overlay {
+   z-index: 50;
+}
+
+.filter-search {
+   @apply bg-white h-10 w-full block py-2 pl-9  border border-blue focus:outline-none !important;
+}
+
+.pill {
+   @apply rounded-md tracking-wider text-xs font-bold whitespace-nowrap;
+   padding: 5px 8px 5px 8px;
+}
+
+input[type="text"]:disabled {
+   @apply bg-gray-lightest !important;
 }

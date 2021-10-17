@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material"
 import React from "react"
 import { Route, Switch } from "react-router"
-import ApplyScreen from "./apply/ApplyScreen"
+import ApplyScreen from "./components/apply/ApplyScreen"
 import AboutUs from "./components/AboutUs"
 import MyApplications from "./components/applications/MyApplications"
 import Home from "./components/home/Home"
@@ -11,6 +11,7 @@ import MapLayout from "./layout/MapLayout"
 import PlainLayout from "./layout/PlainLayout"
 import PrivateRoute from "./routes/PrivateRoute"
 import PublicRoute from "./routes/PublicRoute"
+import MyProperty from "./components/applications/MyProperty"
 
 function App() {
    return (
@@ -25,6 +26,9 @@ function App() {
             </PublicRoute>
             <PrivateRoute path="/apply">
                <ApplyScreen />
+            </PrivateRoute>
+            <PrivateRoute path="/my-property">
+               <MyProperty />
             </PrivateRoute>
             <PrivateRoute path="/my-applications">
                <MyApplications />

@@ -1,3 +1,5 @@
+import { SelectOption } from "./types"
+
 export const backendDateStringToDate = (str: string) => {
    const arr = str.split(/[-+ :T]/).map((s) => +s)
    const date = new Date()
@@ -18,3 +20,19 @@ export const dateToLocalFormat = (date: Date, ommitYear?: boolean) =>
    `${date.getDate()}. ${date.getMonth() + 1}. ${
       ommitYear ? "" : `${date.getFullYear()}`
    }`
+
+export const asOptionsWithNameAndInfo = (
+   data: any[],
+   getInfo: (option: any) => string
+): SelectOption[] =>
+   data.map((d) => ({
+      label: d.name,
+      value: d.id,
+      info: getInfo(d),
+   }))
+
+export const asOptionsWithName = (data: any[]): SelectOption[] =>
+   data.map((d) => ({
+      label: d.name,
+      value: d.id,
+   }))
