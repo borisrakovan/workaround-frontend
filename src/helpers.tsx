@@ -36,3 +36,19 @@ export const asOptionsWithName = (data: any[]): SelectOption[] =>
       label: d.name,
       value: d.id,
    }))
+
+export const serializeTypeArray = (
+   arr: { id: string; name: string }[],
+   title: string
+) => arr.map((o) => ({ ...o, value: `${title}_${o.id}` }))
+
+export const deserializeTypeArray = (values: any, title: string) => {
+   return Object.entries(values)
+      .filter(([k, v]) => k.startsWith(title))
+      .filter(([k, v]) => v)
+      .map(([k, v]) => k.split("_")[1])
+}
+
+export function getRandomInt(max: number) {
+   return Math.floor(Math.random() * max)
+}

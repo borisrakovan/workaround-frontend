@@ -16,7 +16,6 @@ import {
    ListItemButton,
 } from "@mui/material"
 import { PropertyObjectType } from "../types/generated"
-import WifiIcon from "@mui/icons-material/Wifi"
 import Straighten from "@mui/icons-material/SquareFoot"
 import Door from "@mui/icons-material/SensorDoor"
 import Park from "@mui/icons-material/Park"
@@ -27,10 +26,11 @@ interface Props {
    loading?: boolean
    onClose?: () => void
    onZoom?: (propertyToZoomTo: PropertyObjectType) => void
+   onClickDelete?: () => void
 }
 
 const PropertyCard = (props: Props) => {
-   const { property, loading, onClose, onZoom } = props
+   const { property, loading, onClose, onZoom, onClickDelete } = props
    if (loading) {
       return (
          <Card sx={{ width: 345, maxHeight: "95vh" }}>
@@ -90,7 +90,7 @@ const PropertyCard = (props: Props) => {
                   )}
                   <List dense component="div" disablePadding>
                      {property.facilityTypes.map((facilityType) => (
-                        <ListItem sx={{ pl: 4 }}>
+                        <ListItem sx={{ pl: 4 }} key={facilityType.name}>
                            <ListItemIcon>
                               <FacilityIcon facilityType={facilityType} />
                            </ListItemIcon>
@@ -114,15 +114,18 @@ const PropertyCard = (props: Props) => {
                      Close
                   </Button>
                )}
-               {onZoom && (
-                  <Button
-                     size="small"
-                     color="primary"
-                     onClick={() => onZoom?.(property)}
-                  >
-                     Zoom
+               {onClickDelete && (
+                  <Button size="small" color="error" onClick={onClickDelete}>
+                     Delete
                   </Button>
                )}
+               <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => onZoom?.(property)}
+               >
+                  Zoom
+               </Button>
             </CardActions>
          </Card>
       )

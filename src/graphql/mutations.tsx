@@ -6,10 +6,13 @@ import {
    useMutation,
 } from "@apollo/client"
 import {
-   AcceptRecommendation,
-   acceptRecommendationArgs,
    ApplicationType,
    createApplicationArgs,
+   createPropertyArgs,
+   PropertyObjectType,
+   AcceptRecommendation,
+   acceptRecommendationArgs,
+   deletePropertyArgs,
    recommendedApplicationsArgs,
 } from "../types/generated"
 import { RECOMMENDATIONS } from "./queries"
@@ -38,9 +41,20 @@ export const LOGIN = gql`
                id
                user {
                   id
+                  firstName
+                  lastName
                }
-               usdWorth
+               metersSquared
+               roomType
+               facilityTypes {
+                  name
+               }
+               propertyType {
+                  name
+               }
+               name
                photoId
+               description
                distance
                coordinates {
                   x
@@ -74,6 +88,7 @@ export const CREATE_APPLICATION = gql`
       $moveInDate: String!
       $propertyId: ID!
       $petFriendly: Boolean!
+      $propertyTypesIds: [ID!]!
    ) {
       createApplication(
          commuteTypesIds: $commuteTypesIds
@@ -84,8 +99,43 @@ export const CREATE_APPLICATION = gql`
          moveInDate: $moveInDate
          propertyId: $propertyId
          petFriendly: $petFriendly
+         propertyTypesIds: $propertyTypesIds
       ) {
          createdApplication {
+            id
+         }
+      }
+   }
+`
+
+export const CREATE_PROPERTY = gql`
+   mutation createProperty(
+      $coordinates: PointInputType!
+      $facilityTypeIds: [ID!]!
+      $lifestyleTypeIds: [ID!]!
+      $propertyTypeId: ID!
+      $metersSquared: Int!
+      $name: String!
+      $description: String
+      $photoId: String!
+      $roomType: String!
+      $usdWorth: Float!
+      $userId: ID!
+   ) {
+      createProperty(
+         coordinates: $coordinates
+         facilityTypeIds: $facilityTypeIds
+         lifestyleTypeIds: $lifestyleTypeIds
+         propertyTypeId: $propertyTypeId
+         metersSquared: $metersSquared
+         name: $name
+         description: $description
+         photoId: $photoId
+         roomType: $roomType
+         usdWorth: $usdWorth
+         userId: $userId
+      ) {
+         createdProperty {
             id
          }
       }
@@ -102,6 +152,17 @@ const ACCEPT_RECOMMENDATION = gql`
    }
 `
 
+const DELETE_PROPERTY = gql`
+   mutation deleteProperty($propertyId: ID!) {
+      deleteProperty(propertyId: $propertyId) {
+         success
+      }
+   }
+`
+
+export const useDeleteProperty = () =>
+   useTypeSafeMutation<{ success: boolean }, deletePropertyArgs>(DELETE_PROPERTY)
+
 export const useAcceptRecommendation = (
    refetchVariables: recommendedApplicationsArgs
 ) =>
@@ -117,12 +178,27 @@ export const useAcceptRecommendation = (
       }
    )
 
-export const useCreateApplication = () =>
+export const useCreateApplication = (refetchVariables: recommendedApplicationsArgs) =>
    useTypeSafeMutation<
       { success: boolean; createdApplication: ApplicationType },
       createApplicationArgs
+   >(CREATE_APPLICATION, {
+      refetchQueries: [
+         {
+            query: RECOMMENDATIONS,
+            variables: {
+               ...refetchVariables,
+            },
+         },
+      ],
+   })
+
+export const useCreateProperty = () =>
+   useTypeSafeMutation<
+      { success: boolean; createdProperty: PropertyObjectType },
+      createPropertyArgs
    >(
-      CREATE_APPLICATION
+      CREATE_PROPERTY
       //    {
       //    refetchQueries: [
       //       {

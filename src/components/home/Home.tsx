@@ -9,7 +9,7 @@ import PropertyCard from "../PropertyCard"
 import LogoHolder from "./LogoHolder"
 import { useHistory } from "react-router-dom"
 import { useAuthContext } from "../../context/AuthContext"
-// import ReactGlobe from "react-globe"
+import ReactGlobe from "react-globe"
 
 interface Props {}
 
@@ -65,7 +65,7 @@ const Home = (props: Props) => {
                   </div>
                </div>
                <div className="mt-32 md:mt-20 xs:mt-8"></div>
-               {/* <div
+               <div
                   className="absolute h-full w-full"
                   style={{ right: -700, bottom: 0 }}
                >
@@ -88,9 +88,9 @@ const Home = (props: Props) => {
                         }
                      })}
                      width="100%"
-                     onClickMarker={() => alert()}
+                     // onClickMarker={() => alert()}
                   />
-               </div> */}
+               </div>
                <LogoHolder />
             </div>
          </section>
