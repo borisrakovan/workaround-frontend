@@ -101,6 +101,6 @@ export const usePropertyTypes = () =>
 export const useLengthsOfStay = () =>
    useQuery<{ lengthsOfStay: number[] }>(LENGTHS_OF_STAY)
 
-export const useRoomTypes = () => useQuery<{ roomTypes: String[] }>(ROOM_TYPES)
+export const useRoomTypes = () => useQuery<{ roomTypes: string[] }>(ROOM_TYPES)
 
 export const useCities = () => useQuery<{ availableCities: CityType[] }>(CITIES)

@@ -5,7 +5,12 @@ import {
    TypedDocumentNode,
    useMutation,
 } from "@apollo/client"
-import { ApplicationType, createApplicationArgs } from "../types/generated"
+import {
+   ApplicationType,
+   createApplicationArgs,
+   createPropertyArgs,
+   PropertyObjectType,
+} from "../types/generated"
 // import { ME_FIELDS } from "./fragments"
 
 export const useTypeSafeMutation = <TData, TVariables>(
@@ -67,6 +72,7 @@ export const CREATE_APPLICATION = gql`
       $moveInDate: String!
       $propertyId: ID!
       $petFriendly: Boolean!
+      $propertyTypesIds: [ID!]!
    ) {
       createApplication(
          commuteTypesIds: $commuteTypesIds
@@ -77,8 +83,43 @@ export const CREATE_APPLICATION = gql`
          moveInDate: $moveInDate
          propertyId: $propertyId
          petFriendly: $petFriendly
+         propertyTypesIds: $propertyTypesIds
       ) {
          createdApplication {
+            id
+         }
+      }
+   }
+`
+
+export const CREATE_PROPERTY = gql`
+   mutation createProperty(
+      $coordinates: PointInputType!
+      $facilityTypeIds: [ID!]!
+      $lifestyleTypeIds: [ID!]!
+      $propertyTypeId: ID!
+      $metersSquared: Int!
+      $name: String!
+      $description: String
+      $photoId: String!
+      $roomType: String!
+      $usdWorth: Float!
+      $userId: ID!
+   ) {
+      createProperty(
+         coordinates: $coordinates
+         facilityTypeIds: $facilityTypeIds
+         lifestyleTypeIds: $lifestyleTypeIds
+         propertyTypeId: $propertyTypeId
+         metersSquared: $metersSquared
+         name: $name
+         description: $description
+         photoId: $photoId
+         roomType: $roomType
+         usdWorth: $usdWorth
+         userId: $userId
+      ) {
+         createdProperty {
             id
          }
       }
@@ -91,6 +132,24 @@ export const useCreateApplication = () =>
       createApplicationArgs
    >(
       CREATE_APPLICATION
+      //    {
+      //    refetchQueries: [
+      //       {
+      //          query: EMPLOYEE_DETAIL,
+      //          variables: {
+      //             ...refetchVariables,
+      //          },
+      //       },
+      //    ],
+      // }
+   )
+
+export const useCreateProperty = () =>
+   useTypeSafeMutation<
+      { success: boolean; createdProperty: PropertyObjectType },
+      createPropertyArgs
+   >(
+      CREATE_PROPERTY
       //    {
       //    refetchQueries: [
       //       {
