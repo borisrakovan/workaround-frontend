@@ -80,12 +80,17 @@ const PropertyCard = (props: Props) => {
                      <ListItemText primary={property.roomType} />
                   </ListItem>
 
-                  <ListItem>
-                     <ListItemIcon>
-                        <Park />
-                     </ListItemIcon>
-                     <ListItemText id="switch-list-label-wifi" primary="Amenities" />
-                  </ListItem>
+                  {property.facilityTypes.length !== 0 && (
+                     <ListItem>
+                        <ListItemIcon>
+                           <Park />
+                        </ListItemIcon>
+                        <ListItemText
+                           id="switch-list-label-wifi"
+                           primary="Amenities"
+                        />
+                     </ListItem>
+                  )}
                   <List component="div" disablePadding>
                      {property.facilityTypes.map((facilityType) => (
                         <ListItem sx={{ pl: 4 }}>

@@ -19,6 +19,7 @@ import React from "react"
 import { useHistory } from "react-router"
 import { PropertyObjectType } from "../types/generated"
 import TypeOfPropertyIcon from "./TypeOfPropertyIcon"
+import Recommend from "@mui/icons-material/Recommend"
 
 interface Props {
    matchedProperties: PropertyObjectType[]
@@ -31,7 +32,7 @@ const MatchedPropertiesCard = (props: Props) => {
    const history = useHistory()
 
    const handleClick = () => {
-      history.push({ pathname: "/my-applications" })
+      history.push({ pathname: "/my-recommendations" })
    }
    return (
       <Card
@@ -39,24 +40,29 @@ const MatchedPropertiesCard = (props: Props) => {
          className="flex flex-col justify-between"
       >
          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-               Recommended for you
+            <Typography
+               gutterBottom
+               variant="h5"
+               component="div"
+               className="flex justify-around items-center"
+            >
+               Recommended for you <Recommend />
             </Typography>
-
-            <List>
-               {matchedProperties.map((property) => (
-                  <ListItemButton
-                     onClick={() => onPropertyClick?.(property)}
-                     selected={selectedProperty?.id === property.id}
-                  >
-                     <ListItemIcon>
-                        <TypeOfPropertyIcon property={property} />
-                     </ListItemIcon>
-                     <ListItemText primary={`${property.name} `} />
-                  </ListItemButton>
-               ))}
-            </List>
          </CardContent>
+         <List>
+            {matchedProperties.map((property) => (
+               <ListItemButton
+                  onClick={() => onPropertyClick?.(property)}
+                  selected={selectedProperty?.id === property.id}
+               >
+                  <ListItemIcon>
+                     <TypeOfPropertyIcon property={property} />
+                  </ListItemIcon>
+                  <ListItemText primary={`${property.name} `} />
+               </ListItemButton>
+            ))}
+         </List>
+
          <CardActions>
             <Button
                color="success"
@@ -64,7 +70,7 @@ const MatchedPropertiesCard = (props: Props) => {
                fullWidth
                onClick={handleClick}
             >
-               Go to My Applications
+               Go to My Recommendations
             </Button>
          </CardActions>
       </Card>

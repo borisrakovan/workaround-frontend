@@ -1,11 +1,13 @@
 import { gql, useQuery } from "@apollo/client"
 import {
+   ApplicationType,
    CityType,
    CommuteTypeType,
    FacilityTypeType,
    LifestyleTypeType,
    PropertyObjectType,
    PropertyTypeType,
+   recommendedApplicationsArgs,
 } from "../types/generated"
 
 const PROPERTIES = gql`
@@ -32,6 +34,58 @@ const PROPERTIES = gql`
          coordinates {
             x
             y
+         }
+      }
+   }
+`
+
+const RECOMMENDATIONS = gql`
+   query recommendedApplications($userId: ID!) {
+      recommendedApplications(userId: $userId) {
+         id
+         property {
+            coordinates {
+               x
+               y
+            }
+            metersSquared
+            facilityTypes {
+               name
+            }
+            roomType
+            id
+            photoId
+            propertyType {
+               name
+            }
+            name
+            city {
+               name
+               country
+            }
+
+            user {
+               firstName
+               lastName
+            }
+         }
+         petFriendly
+         moveInDate
+         lengthOfStay
+         lifestyleTypes {
+            name
+         }
+         commuteTypes {
+            name
+         }
+         facilityTypes {
+            name
+         }
+         propertyTypes {
+            name
+         }
+         preferredCities {
+            name
          }
       }
    }
@@ -93,6 +147,12 @@ const CITIES = gql`
       }
    }
 `
+
+export const useRecommendations = (variables: recommendedApplicationsArgs) =>
+   useQuery<
+      { recommendedApplications: ApplicationType[] },
+      recommendedApplicationsArgs
+   >(RECOMMENDATIONS, { variables })
 
 export const useProperties = () =>
    useQuery<{ closestProperties: PropertyObjectType[] }>(PROPERTIES)

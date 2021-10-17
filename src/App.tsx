@@ -30,7 +30,7 @@ function App() {
             <PrivateRoute path="/my-property">
                <MyProperty />
             </PrivateRoute>
-            <PrivateRoute path="/my-applications">
+            <PrivateRoute path="/my-recommendations">
                <MyApplications />
             </PrivateRoute>
             <Route exact path="/">

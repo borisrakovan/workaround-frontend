@@ -1,13 +1,14 @@
 import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useProperties } from "../../graphql/queries"
+import { useProperties, useRecommendations } from "../../graphql/queries"
 import { PropertyObjectType } from "../../types/generated"
 import WorkaroundLogo from "../../WorkaroundLogo"
 import Map from "../Map"
 import PropertyCard from "../PropertyCard"
 import LogoHolder from "./LogoHolder"
 import { useHistory } from "react-router-dom"
+import { useAuthContext } from "../../context/AuthContext"
 // import ReactGlobe from "react-globe"
 
 interface Props {}

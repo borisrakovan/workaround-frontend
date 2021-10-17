@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
-import { useProperties } from "../graphql/queries"
+import { useProperties, useRecommendations } from "../graphql/queries"
 import { PropertyObjectType } from "../types/generated"
 import Map from "./Map"
 // import { divIcon } from "leaflet"
@@ -8,6 +8,7 @@ import PropertyCard from "./PropertyCard"
 import qs from "qs"
 import LoadingSpinner from "./LoadingSpinner"
 import MatchedPropertiesCard from "./MatchedPropertiesCard"
+import { useAuthContext } from "../context/AuthContext"
 
 interface Props {}
 
@@ -19,6 +20,10 @@ const MapScreen = (props: Props) => {
    >(undefined)
 
    const history = useHistory()
+   const { currentUser } = useAuthContext()
+   const { data: recommended } = useRecommendations({
+      userId: currentUser?.id || "1",
+   })
 
    const { data, loading } = useProperties()
 
@@ -100,13 +105,19 @@ const MapScreen = (props: Props) => {
                />
             </div>
          )}
-         <div className="absolute top-28 left-10 z-10">
-            <MatchedPropertiesCard
-               matchedProperties={data?.closestProperties.slice(0, 5) ?? []}
-               onPropertyClick={handleMarkerClick}
-               selectedProperty={selectedProperty}
-            />
-         </div>
+         {currentUser && (
+            <div className="absolute top-28 left-10 z-10">
+               <MatchedPropertiesCard
+                  matchedProperties={
+                     recommended?.recommendedApplications.map(
+                        (application) => application.property
+                     ) ?? []
+                  }
+                  onPropertyClick={handleMarkerClick}
+                  selectedProperty={selectedProperty}
+               />
+            </div>
+         )}
       </div>
    )
 }
