@@ -23,6 +23,7 @@ import TypeOfPropertyIcon from "../TypeOfPropertyIcon"
 import { useRecommendations } from "../../graphql/queries"
 import { useAuthContext } from "../../context/AuthContext"
 import DoneOutline from "@mui/icons-material/DoneOutline"
+import Groups from "@mui/icons-material/Groups"
 import Pets from "@mui/icons-material/Pets"
 import FlightLand from "@mui/icons-material/FlightLand"
 import DateRange from "@mui/icons-material/DateRange"
@@ -118,12 +119,14 @@ const MyApplications = (props: Props) => {
                                  )
                               )}
                            </List>
-                           {/* <ListItem>
+                           <ListItem>
                               <ListItemIcon>
-                                 <NightLife />
+                                 <Groups />
                               </ListItemIcon>
-                              <ListItemText />
-                           </ListItem> */}
+                              <ListItemText
+                                 primary={`Registered people in swap: ${application.recommendation.progress.done}/${application.recommendation.progress.total}`}
+                              />
+                           </ListItem>
                         </List>
                      </CardContent>
                      <ListItem sx={{ marginTop: 3 }}>

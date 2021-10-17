@@ -45,6 +45,12 @@ export const RECOMMENDATIONS = gql`
       recommendedApplications(userId: $userId) {
          id
          accepted
+         recommendation {
+            progress {
+               done
+               total
+            }
+         }
          application {
             id
             property {
