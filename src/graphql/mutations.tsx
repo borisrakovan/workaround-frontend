@@ -10,7 +10,9 @@ import {
    acceptRecommendationArgs,
    ApplicationType,
    createApplicationArgs,
+   recommendedApplicationsArgs,
 } from "../types/generated"
+import { RECOMMENDATIONS } from "./queries"
 // import { ME_FIELDS } from "./fragments"
 
 export const useTypeSafeMutation = <TData, TVariables>(
@@ -100,9 +102,19 @@ const ACCEPT_RECOMMENDATION = gql`
    }
 `
 
-export const useAcceptRecommendation = () =>
+export const useAcceptRecommendation = (
+   refetchVariables: recommendedApplicationsArgs
+) =>
    useTypeSafeMutation<AcceptRecommendation, acceptRecommendationArgs>(
-      ACCEPT_RECOMMENDATION
+      ACCEPT_RECOMMENDATION,
+      {
+         refetchQueries: [
+            {
+               query: RECOMMENDATIONS,
+               variables: refetchVariables,
+            },
+         ],
+      }
    )
 
 export const useCreateApplication = () =>

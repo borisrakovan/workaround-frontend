@@ -17,12 +17,13 @@ import {
 } from "@mui/material"
 import React from "react"
 import { useHistory } from "react-router"
-import { PropertyObjectType } from "../types/generated"
+import { PropertyObjectType, RecommendationApplicationType } from "../types/generated"
 import TypeOfPropertyIcon from "./TypeOfPropertyIcon"
 import Recommend from "@mui/icons-material/Recommend"
+import DoneOutline from "@mui/icons-material/DoneOutline"
 
 interface Props {
-   matchedProperties: PropertyObjectType[]
+   matchedProperties: RecommendationApplicationType[]
    onPropertyClick?: (clickedProperty: PropertyObjectType) => void
    selectedProperty?: PropertyObjectType
 }
@@ -49,16 +50,27 @@ const MatchedPropertiesCard = (props: Props) => {
                Recommended for you <Recommend />
             </Typography>
          </CardContent>
-         <List>
-            {matchedProperties.map((property) => (
+         <List dense>
+            {matchedProperties.map((application) => (
                <ListItemButton
-                  onClick={() => onPropertyClick?.(property)}
-                  selected={selectedProperty?.id === property.id}
+                  onClick={() => onPropertyClick?.(application.application.property)}
+                  selected={
+                     selectedProperty?.id === application.application.property.id
+                  }
                >
                   <ListItemIcon>
-                     <TypeOfPropertyIcon property={property} />
+                     <TypeOfPropertyIcon
+                        property={application.application.property}
+                     />
                   </ListItemIcon>
-                  <ListItemText primary={`${property.name} `} />
+                  <ListItemText
+                     primary={`${application.application.property.name} `}
+                  />
+                  {application.accepted && (
+                     <Tooltip title="You accepted this recommendation!">
+                        <DoneOutline />
+                     </Tooltip>
+                  )}
                </ListItemButton>
             ))}
          </List>

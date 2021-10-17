@@ -54,7 +54,7 @@ const PropertyCard = (props: Props) => {
          >
             <CardMedia
                component="img"
-               height="140"
+               sx={{ height: 200 }}
                image={`/img/properties/${property.photoId}`}
             />
 
@@ -62,10 +62,7 @@ const PropertyCard = (props: Props) => {
                <Typography gutterBottom variant="h5" component="div">
                   {property.name}
                </Typography>
-               <Typography variant="body2" color="text.secondary">
-                  {/* {property.user} */}
-               </Typography>
-               <List>
+               <List dense sx={{ overflowY: "auto" }}>
                   <ListItem>
                      <ListItemIcon>
                         <Straighten />
@@ -91,7 +88,7 @@ const PropertyCard = (props: Props) => {
                         />
                      </ListItem>
                   )}
-                  <List component="div" disablePadding>
+                  <List dense component="div" disablePadding>
                      {property.facilityTypes.map((facilityType) => (
                         <ListItem sx={{ pl: 4 }}>
                            <ListItemIcon>
@@ -101,28 +98,31 @@ const PropertyCard = (props: Props) => {
                         </ListItem>
                      ))}
                   </List>
-                  <ListItem sx={{ marginTop: 3 }}>
-                     <ListItemAvatar>
-                        <Avatar>{`${property.user.firstName[0]}${property.user.lastName[0]}`}</Avatar>
-                     </ListItemAvatar>
-                     <ListItemText
-                        primary={`${property.user.firstName} ${property.user.lastName}`}
-                     />
-                  </ListItem>
                </List>
             </CardContent>
-
+            <ListItem>
+               <ListItemAvatar>
+                  <Avatar>{`${property.user.firstName[0]}${property.user.lastName[0]}`}</Avatar>
+               </ListItemAvatar>
+               <ListItemText
+                  primary={`${property.user.firstName} ${property.user.lastName}`}
+               />
+            </ListItem>
             <CardActions>
-               <Button size="small" color="error" onClick={onClose}>
-                  Close
-               </Button>
-               <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => onZoom?.(property)}
-               >
-                  Zoom
-               </Button>
+               {onClose && (
+                  <Button size="small" color="error" onClick={onClose}>
+                     Close
+                  </Button>
+               )}
+               {onZoom && (
+                  <Button
+                     size="small"
+                     color="primary"
+                     onClick={() => onZoom?.(property)}
+                  >
+                     Zoom
+                  </Button>
+               )}
             </CardActions>
          </Card>
       )

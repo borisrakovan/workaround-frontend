@@ -15,19 +15,25 @@ import {
    ListItemIcon,
    Tooltip,
    ListItemButton,
+   ListSubheader,
    Box,
    Grid,
 } from "@mui/material"
 import TypeOfPropertyIcon from "../TypeOfPropertyIcon"
 import { useRecommendations } from "../../graphql/queries"
 import { useAuthContext } from "../../context/AuthContext"
-import Map from "@mui/icons-material/Map"
+import DoneOutline from "@mui/icons-material/DoneOutline"
+import Pets from "@mui/icons-material/Pets"
+import FlightLand from "@mui/icons-material/FlightLand"
+import DateRange from "@mui/icons-material/DateRange"
+import NightLife from "@mui/icons-material/Nightlife"
 import {
    PropertyObjectType,
    RecommendationApplicationType,
 } from "../../types/generated"
 import { useHistory } from "react-router"
 import { useAcceptRecommendation } from "../../graphql/mutations"
+import LifeStyleIcon from "../LifeStyleIcon"
 
 interface Props {}
 
@@ -36,7 +42,7 @@ const MyApplications = (props: Props) => {
    const { data } = useRecommendations({ userId: currentUser?.id || "1" })
    const history = useHistory()
 
-   const { mutate } = useAcceptRecommendation()
+   const { mutate } = useAcceptRecommendation({ userId: currentUser?.id || "1" })
 
    const handleFindOnMap = (property: PropertyObjectType) => {
       const params = new URLSearchParams()
@@ -61,7 +67,7 @@ const MyApplications = (props: Props) => {
                   <Card sx={{ maxWidth: 345 }}>
                      <CardMedia
                         component="img"
-                        sx={{ width: 345 }}
+                        sx={{ height: 200 }}
                         image={`/img/properties/${application.application.property.photoId}`}
                      />
 
@@ -69,12 +75,65 @@ const MyApplications = (props: Props) => {
                         <Typography gutterBottom variant="h5" component="div">
                            {application.application.property.name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                           Lizards are a widespread group of squamate reptiles, with
-                           over 6,000 species, ranging across all continents except
-                           Antarctica
-                        </Typography>
+                        <List dense sx={{ overflowY: "auto" }}>
+                           {application.application.petFriendly && (
+                              <ListItem>
+                                 <ListItemIcon>
+                                    <Pets />
+                                 </ListItemIcon>
+                                 <ListItemText primary="Pet Friendly" />
+                              </ListItem>
+                           )}
+                           <ListItem>
+                              <ListItemIcon>
+                                 <FlightLand />
+                              </ListItemIcon>
+                              <ListItemText
+                                 primary={`Move In: ${application.application.moveInDate}`}
+                              />
+                           </ListItem>
+                           <ListItem>
+                              <ListItemIcon>
+                                 <DateRange />
+                              </ListItemIcon>
+                              <ListItemText
+                                 primary={`Duration: ${application.application.lengthOfStay}`}
+                              />
+                           </ListItem>
+                           <ListItem>
+                              <ListItemIcon>
+                                 <NightLife />
+                              </ListItemIcon>
+                              <ListItemText primary="Life Style" />
+                           </ListItem>
+                           <List component="div" disablePadding>
+                              {application.application.lifestyleTypes.map(
+                                 (lifestyle) => (
+                                    <ListItem sx={{ pl: 4 }}>
+                                       <ListItemIcon>
+                                          <LifeStyleIcon lifeStyleType={lifestyle} />
+                                       </ListItemIcon>
+                                       <ListItemText primary={lifestyle.name} />
+                                    </ListItem>
+                                 )
+                              )}
+                           </List>
+                           {/* <ListItem>
+                              <ListItemIcon>
+                                 <NightLife />
+                              </ListItemIcon>
+                              <ListItemText />
+                           </ListItem> */}
+                        </List>
                      </CardContent>
+                     <ListItem sx={{ marginTop: 3 }}>
+                        <ListItemAvatar>
+                           <Avatar>{`${application.application.property.user.firstName[0]}${application.application.property.user.lastName[0]}`}</Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                           primary={`${application.application.property.user.firstName} ${application.application.property.user.lastName}`}
+                        />
+                     </ListItem>
                      <CardActions>
                         <Button
                            color="success"
@@ -91,7 +150,13 @@ const MyApplications = (props: Props) => {
                            disabled={application.accepted}
                            onClick={() => handleAccept(application)}
                         >
-                           Accept
+                           {application.accepted ? (
+                              <>
+                                 <DoneOutline /> Accepted
+                              </>
+                           ) : (
+                              "Accept"
+                           )}
                         </Button>
                      </CardActions>
                   </Card>

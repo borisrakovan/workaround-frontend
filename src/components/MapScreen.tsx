@@ -108,11 +108,7 @@ const MapScreen = (props: Props) => {
          {currentUser && (
             <div className="absolute top-28 left-10 z-10">
                <MatchedPropertiesCard
-                  matchedProperties={
-                     recommended?.recommendedApplications.map(
-                        (application) => application.application.property
-                     ) ?? []
-                  }
+                  matchedProperties={recommended?.recommendedApplications ?? []}
                   onPropertyClick={handleMarkerClick}
                   selectedProperty={selectedProperty}
                />

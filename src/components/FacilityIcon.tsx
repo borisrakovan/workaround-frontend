@@ -5,6 +5,7 @@ import Pool from "@mui/icons-material/Pool"
 import Parking from "@mui/icons-material/LocalParking"
 import Elevator from "@mui/icons-material/Elevator"
 import FitnessCenter from "@mui/icons-material/FitnessCenter"
+import { Tooltip } from "@mui/material"
 
 interface Props {
    facilityType: FacilityTypeType
@@ -15,15 +16,35 @@ const FacilityIcon = (props: Props) => {
 
    switch (facilityType.name) {
       case "Pool":
-         return <Pool />
+         return (
+            <Tooltip title="Pool">
+               <Pool />
+            </Tooltip>
+         )
       case "Garden":
-         return <Yard />
+         return (
+            <Tooltip title="Garden">
+               <Yard />
+            </Tooltip>
+         )
       case "Lift":
-         return <Elevator />
+         return (
+            <Tooltip title="Lift">
+               <Elevator />
+            </Tooltip>
+         )
       case "Parking":
-         return <Parking />
+         return (
+            <Tooltip title="Parking">
+               <Parking />
+            </Tooltip>
+         )
       case "Gym":
-         return <FitnessCenter />
+         return (
+            <Tooltip title="Gym">
+               <FitnessCenter />
+            </Tooltip>
+         )
       default:
          return null
    }
