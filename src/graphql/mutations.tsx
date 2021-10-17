@@ -10,6 +10,8 @@ import {
    createApplicationArgs,
    createPropertyArgs,
    PropertyObjectType,
+   AcceptRecommendation,
+   acceptRecommendationArgs,
 } from "../types/generated"
 // import { ME_FIELDS } from "./fragments"
 
@@ -125,6 +127,21 @@ export const CREATE_PROPERTY = gql`
       }
    }
 `
+
+const ACCEPT_RECOMMENDATION = gql`
+   mutation acceptRecommendation($recommendationApplicationId: ID!) {
+      acceptRecommendation(
+         recommendationApplicationId: $recommendationApplicationId
+      ) {
+         success
+      }
+   }
+`
+
+export const useAcceptRecommendation = () =>
+   useTypeSafeMutation<AcceptRecommendation, acceptRecommendationArgs>(
+      ACCEPT_RECOMMENDATION
+   )
 
 export const useCreateApplication = () =>
    useTypeSafeMutation<

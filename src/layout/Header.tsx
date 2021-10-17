@@ -37,8 +37,8 @@ const Header = (props: Props) => {
                      </>
                   ) : (
                      <>
-                        <HeaderMenuItem linkTo="/my-applications">
-                           My applications
+                        <HeaderMenuItem linkTo="/my-recommendations">
+                           My recommendations
                         </HeaderMenuItem>
                         <HeaderMenuItem linkTo="/my-property">
                            My property

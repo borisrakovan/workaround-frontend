@@ -1,11 +1,14 @@
 import { gql, useQuery } from "@apollo/client"
 import {
+   ApplicationType,
    CityType,
    CommuteTypeType,
    FacilityTypeType,
    LifestyleTypeType,
    PropertyObjectType,
    PropertyTypeType,
+   RecommendationApplicationType,
+   recommendedApplicationsArgs,
 } from "../types/generated"
 
 const PROPERTIES = gql`
@@ -14,13 +17,80 @@ const PROPERTIES = gql`
          id
          user {
             id
+            firstName
+            lastName
          }
-         usdWorth
+         metersSquared
+         roomType
+         facilityTypes {
+            name
+         }
+         propertyType {
+            name
+         }
+         name
          photoId
+         description
          distance
          coordinates {
             x
             y
+         }
+      }
+   }
+`
+
+const RECOMMENDATIONS = gql`
+   query recommendedApplications($userId: ID!) {
+      recommendedApplications(userId: $userId) {
+         id
+         accepted
+         application {
+            id
+            property {
+               coordinates {
+                  x
+                  y
+               }
+               metersSquared
+               facilityTypes {
+                  name
+               }
+               roomType
+               id
+               photoId
+               propertyType {
+                  name
+               }
+               name
+               city {
+                  name
+                  country
+               }
+
+               user {
+                  firstName
+                  lastName
+               }
+            }
+            petFriendly
+            moveInDate
+            lengthOfStay
+            lifestyleTypes {
+               name
+            }
+            commuteTypes {
+               name
+            }
+            facilityTypes {
+               name
+            }
+            propertyTypes {
+               name
+            }
+            preferredCities {
+               name
+            }
          }
       }
    }
@@ -82,6 +152,12 @@ const CITIES = gql`
       }
    }
 `
+
+export const useRecommendations = (variables: recommendedApplicationsArgs) =>
+   useQuery<
+      { recommendedApplications: RecommendationApplicationType[] },
+      recommendedApplicationsArgs
+   >(RECOMMENDATIONS, { variables })
 
 export const useProperties = () =>
    useQuery<{ closestProperties: PropertyObjectType[] }>(PROPERTIES)

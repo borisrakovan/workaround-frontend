@@ -25,51 +25,35 @@ module.exports = {
             // xl: "5rem",
          },
       },
-      colors: {
-         // cyan: {
-         //    dark: "#00838f",
-         //    DEFAULT: "#0097a7",
-         //    // according to opacities
-         //    90: "#19a1af",
-         //    60: "#66c0ca",
-         //    // DEFAULT with 0.4 opacity
-         //    light: "#99d5db",
-         // },
-
-         // yellow: {
-         //    DEFAULT: "#ffca28",
-         // },
-         red: {
-            DEFAULT: "#f44336",
-            light: "#F9928B",
-            lightest: "#F44336",
-         },
-         gray: {
-            // light: "#E0E0E0",
-            lightest: "#f5f5f5",
-            DEFAULT: "#BFC0C0",
-            dark: "#424242",
-         },
-         white: {
-            DEFAULT: "#ffffff",
-         },
-         orange: {
-            DEFAULT: "#EF8354",
-            dark: "#EC6A32",
-         },
-         blue: {
-            DEFAULT: "#2D3142",
-            light: "#4F5D75",
-         },
-
-         // green: {
-         //    DEFAULT: "#00A761",
-         // },
-      },
       fontFamily: {
          sans: ["Roboto", "Helvetica", "Arial", "sans-serif"],
       },
-      extend: {},
+      extend: {
+         colors: {
+            red: {
+               DEFAULT: "#f44336",
+               light: "#F9928B",
+               lightest: "#F44336",
+            },
+            gray: {
+               // light: "#E0E0E0",
+               lightest: "#f5f5f5",
+               DEFAULT: "#BFC0C0",
+               dark: "#424242",
+            },
+            white: {
+               DEFAULT: "#ffffff",
+            },
+            orange: {
+               DEFAULT: "#EF8354",
+               dark: "#EC6A32",
+            },
+            blue: {
+               DEFAULT: "#2D3142",
+               light: "#4F5D75",
+            },
+         },
+      },
    },
    corePlugins: {
       boxShadow: false,

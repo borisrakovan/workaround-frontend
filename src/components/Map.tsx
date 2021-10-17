@@ -5,15 +5,16 @@ interface Props {
    whenCreated: any
    displayedProperties?: PropertyObjectType[]
    onMarkerClick: (property: PropertyObjectType) => void
+   defaultZoom?: number
 }
 
 const Map = (props: Props) => {
-   const { whenCreated, displayedProperties, onMarkerClick } = props
+   const { whenCreated, displayedProperties, onMarkerClick, defaultZoom } = props
 
    return (
       <div className="z-0 w-full h-full relative">
          <MapContainer
-            zoom={13}
+            zoom={defaultZoom ?? 13}
             scrollWheelZoom={false}
             center={[10, 10]}
             whenCreated={whenCreated}

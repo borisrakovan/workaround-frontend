@@ -116,6 +116,10 @@ label {
 .shadow-blue {
    box-shadow: rgba(0, 151, 167, 1) 0px 0px 6px 0px;
 }
+canvas {
+   outline: none;
+   border: none;
+}
 
 .row {
    @apply grid grid-cols-12 gap-6;
