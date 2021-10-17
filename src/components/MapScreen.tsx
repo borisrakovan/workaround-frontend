@@ -110,7 +110,7 @@ const MapScreen = (props: Props) => {
                <MatchedPropertiesCard
                   matchedProperties={
                      recommended?.recommendedApplications.map(
-                        (application) => application.property
+                        (application) => application.application.property
                      ) ?? []
                   }
                   onPropertyClick={handleMarkerClick}

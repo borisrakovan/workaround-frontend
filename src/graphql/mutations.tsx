@@ -5,7 +5,12 @@ import {
    TypedDocumentNode,
    useMutation,
 } from "@apollo/client"
-import { ApplicationType, createApplicationArgs } from "../types/generated"
+import {
+   AcceptRecommendation,
+   acceptRecommendationArgs,
+   ApplicationType,
+   createApplicationArgs,
+} from "../types/generated"
 // import { ME_FIELDS } from "./fragments"
 
 export const useTypeSafeMutation = <TData, TVariables>(
@@ -84,6 +89,21 @@ export const CREATE_APPLICATION = gql`
       }
    }
 `
+
+const ACCEPT_RECOMMENDATION = gql`
+   mutation acceptRecommendation($recommendationApplicationId: ID!) {
+      acceptRecommendation(
+         recommendationApplicationId: $recommendationApplicationId
+      ) {
+         success
+      }
+   }
+`
+
+export const useAcceptRecommendation = () =>
+   useTypeSafeMutation<AcceptRecommendation, acceptRecommendationArgs>(
+      ACCEPT_RECOMMENDATION
+   )
 
 export const useCreateApplication = () =>
    useTypeSafeMutation<

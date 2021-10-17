@@ -22,8 +22,12 @@ import TypeOfPropertyIcon from "../TypeOfPropertyIcon"
 import { useRecommendations } from "../../graphql/queries"
 import { useAuthContext } from "../../context/AuthContext"
 import Map from "@mui/icons-material/Map"
-import { PropertyObjectType } from "../../types/generated"
+import {
+   PropertyObjectType,
+   RecommendationApplicationType,
+} from "../../types/generated"
 import { useHistory } from "react-router"
+import { useAcceptRecommendation } from "../../graphql/mutations"
 
 interface Props {}
 
@@ -32,10 +36,20 @@ const MyApplications = (props: Props) => {
    const { data } = useRecommendations({ userId: currentUser?.id || "1" })
    const history = useHistory()
 
+   const { mutate } = useAcceptRecommendation()
+
    const handleFindOnMap = (property: PropertyObjectType) => {
       const params = new URLSearchParams()
       params.append("propertyId", property.id)
       history.push({ pathname: "/explore", search: params.toString() })
+   }
+
+   const handleAccept = (
+      recommendationApplication: RecommendationApplicationType
+   ) => {
+      mutate({
+         variables: { recommendationApplicationId: recommendationApplication.id },
+      })
    }
 
    return (
@@ -48,12 +62,12 @@ const MyApplications = (props: Props) => {
                      <CardMedia
                         component="img"
                         sx={{ width: 345 }}
-                        image={`/img/properties/${application.property.photoId}`}
+                        image={`/img/properties/${application.application.property.photoId}`}
                      />
 
                      <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                           {application.property.name}
+                           {application.application.property.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                            Lizards are a widespread group of squamate reptiles, with
@@ -65,9 +79,19 @@ const MyApplications = (props: Props) => {
                         <Button
                            color="success"
                            variant="text"
-                           onClick={() => handleFindOnMap(application.property)}
+                           onClick={() =>
+                              handleFindOnMap(application.application.property)
+                           }
                         >
                            Find on Map
+                        </Button>
+                        <Button
+                           color="success"
+                           variant="contained"
+                           disabled={application.accepted}
+                           onClick={() => handleAccept(application)}
+                        >
+                           Accept
                         </Button>
                      </CardActions>
                   </Card>

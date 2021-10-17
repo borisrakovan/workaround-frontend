@@ -7,6 +7,7 @@ import {
    LifestyleTypeType,
    PropertyObjectType,
    PropertyTypeType,
+   RecommendationApplicationType,
    recommendedApplicationsArgs,
 } from "../types/generated"
 
@@ -43,49 +44,53 @@ const RECOMMENDATIONS = gql`
    query recommendedApplications($userId: ID!) {
       recommendedApplications(userId: $userId) {
          id
-         property {
-            coordinates {
-               x
-               y
+         accepted
+         application {
+            id
+            property {
+               coordinates {
+                  x
+                  y
+               }
+               metersSquared
+               facilityTypes {
+                  name
+               }
+               roomType
+               id
+               photoId
+               propertyType {
+                  name
+               }
+               name
+               city {
+                  name
+                  country
+               }
+
+               user {
+                  firstName
+                  lastName
+               }
             }
-            metersSquared
+            petFriendly
+            moveInDate
+            lengthOfStay
+            lifestyleTypes {
+               name
+            }
+            commuteTypes {
+               name
+            }
             facilityTypes {
                name
             }
-            roomType
-            id
-            photoId
-            propertyType {
+            propertyTypes {
                name
             }
-            name
-            city {
+            preferredCities {
                name
-               country
             }
-
-            user {
-               firstName
-               lastName
-            }
-         }
-         petFriendly
-         moveInDate
-         lengthOfStay
-         lifestyleTypes {
-            name
-         }
-         commuteTypes {
-            name
-         }
-         facilityTypes {
-            name
-         }
-         propertyTypes {
-            name
-         }
-         preferredCities {
-            name
          }
       }
    }
@@ -150,7 +155,7 @@ const CITIES = gql`
 
 export const useRecommendations = (variables: recommendedApplicationsArgs) =>
    useQuery<
-      { recommendedApplications: ApplicationType[] },
+      { recommendedApplications: RecommendationApplicationType[] },
       recommendedApplicationsArgs
    >(RECOMMENDATIONS, { variables })
 
