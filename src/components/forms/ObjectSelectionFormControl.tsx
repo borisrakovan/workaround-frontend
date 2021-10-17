@@ -22,8 +22,8 @@ const ObjectSelectionFormControl = (props: Props) => {
    } = props
 
    return (
-      <div className="form-control">
-         <label className="mb-2 font-bold block">{label}</label>
+      <div className="form-control flex items-center py-2">
+         <label className=" font-bold block mr-3">{label}</label>
          <div className="inline-block">
             {!!selectedObject ? (
                <Pill

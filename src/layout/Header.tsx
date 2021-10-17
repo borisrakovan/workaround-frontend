@@ -13,8 +13,6 @@ const Header = (props: Props) => {
    const history = useHistory()
    const handleLogout = () => history.push("/")
 
-   console.log(userLoading)
-   console.log(currentUser)
    return (
       <header className={`site-header z-10 py-3 flex items-center shadow w-full`}>
          <div className="flex items-center justify-between w-full">
@@ -41,6 +39,9 @@ const Header = (props: Props) => {
                      <>
                         <HeaderMenuItem linkTo="/my-applications">
                            My applications
+                        </HeaderMenuItem>
+                        <HeaderMenuItem linkTo="/my-property">
+                           My property
                         </HeaderMenuItem>
                         <HeaderMenuSeparator />
                         <li className="inline-block px-3 mx-1 my-2">

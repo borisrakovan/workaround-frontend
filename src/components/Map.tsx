@@ -1,10 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
-import { PropertyType } from "../types/generated"
+import { PropertyObjectType } from "../types/generated"
 
 interface Props {
    whenCreated: any
-   displayedProperties?: PropertyType[]
-   onMarkerClick: (property: PropertyType) => void
+   displayedProperties?: PropertyObjectType[]
+   onMarkerClick: (property: PropertyObjectType) => void
 }
 
 const Map = (props: Props) => {

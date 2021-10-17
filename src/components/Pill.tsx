@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import React from "react"
 import { Link } from "react-router-dom"
-import { ReactComponent as IconCancel } from "../../../../assets/icons/cross.svg"
+import { ReactComponent as IconCancel } from "../assets/icons/cross.svg"
 
 export interface PillProps {
    text: string
@@ -38,7 +38,7 @@ const Pill = (props: PillProps) => {
    }
 
    const className = classNames(
-      `tag-empl hover:no-underline ${props.className ?? ""}`,
+      `pill hover:no-underline ${props.className ?? ""}`,
       getBgColorClassName(),
       {
          "text-white hover:text-white": color == "orange",

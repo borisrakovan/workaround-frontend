@@ -23,7 +23,7 @@ const AuthContext = React.createContext<AuthContextType>({
 // https://www.digitalocean.com/community/tutorials/react-manage-user-login-react-context
 const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
    const [currentUser, setCurrentUser] = useState<UserType | null>(null)
-   const [userLoading, setUserLoading] = useState(true)
+   const [userLoading, setUserLoading] = useState(false)
    // refreshToken mutation returns token and user only if the JWT HTTP-only cookie is set
    // (the user logged during previous sessions)
 
@@ -49,8 +49,6 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
    //       setUserLoading(false)
    //    })
    // }, [])
-
-   console.log(currentUser)
 
    return (
       <AuthContext.Provider value={{ currentUser, userLoading, login, logout }}>

@@ -1,5 +1,12 @@
 import { gql, useQuery } from "@apollo/client"
-import { FacilityTypeType, LifestyleTypeType, PropertyType } from "../types/generated"
+import {
+   CityType,
+   CommuteTypeType,
+   FacilityTypeType,
+   LifestyleTypeType,
+   PropertyObjectType,
+   PropertyTypeType,
+} from "../types/generated"
 
 const PROPERTIES = gql`
    query closestProperties {
@@ -49,8 +56,35 @@ const ROOM_TYPES = gql`
    }
 `
 
+const COMMUTE_TYPES = gql`
+   query commuteTypes {
+      commuteTypes {
+         id
+         name
+      }
+   }
+`
+const PROPERTY_TYPES = gql`
+   query propertyTypes {
+      propertyTypes {
+         id
+         name
+      }
+   }
+`
+
+const CITIES = gql`
+   query availableCities {
+      availableCities {
+         id
+         name
+         country
+      }
+   }
+`
+
 export const useProperties = () =>
-   useQuery<{ closestProperties: PropertyType[] }>(PROPERTIES)
+   useQuery<{ closestProperties: PropertyObjectType[] }>(PROPERTIES)
 
 export const useLifestyleTypes = () =>
    useQuery<{ lifestyleTypes: LifestyleTypeType[] }>(LIFESTYLE_TYPES)
@@ -58,7 +92,15 @@ export const useLifestyleTypes = () =>
 export const useFacilityTypes = () =>
    useQuery<{ facilityTypes: FacilityTypeType[] }>(FACILITY_TYPES)
 
+export const useCommuteTypes = () =>
+   useQuery<{ commuteTypes: CommuteTypeType[] }>(COMMUTE_TYPES)
+
+export const usePropertyTypes = () =>
+   useQuery<{ propertyTypes: PropertyTypeType[] }>(PROPERTY_TYPES)
+
 export const useLengthsOfStay = () =>
    useQuery<{ lengthsOfStay: number[] }>(LENGTHS_OF_STAY)
 
 export const useRoomTypes = () => useQuery<{ roomTypes: String[] }>(ROOM_TYPES)
+
+export const useCities = () => useQuery<{ availableCities: CityType[] }>(CITIES)

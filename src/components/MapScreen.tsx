@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useProperties } from "../graphql/queries"
-import { PropertyType } from "../types/generated"
+import { PropertyObjectType } from "../types/generated"
 import Map from "./Map"
 // import { divIcon } from "leaflet"
 import PropertyCard from "./PropertyCard"
@@ -9,9 +9,9 @@ interface Props {}
 
 const MapScreen = (props: Props) => {
    const [map, setMap] = useState<any>(null)
-   const [selectedProperty, setSelectedProperty] = useState<PropertyType | undefined>(
-      undefined
-   )
+   const [selectedProperty, setSelectedProperty] = useState<
+      PropertyObjectType | undefined
+   >(undefined)
 
    const { data, loading } = useProperties()
 

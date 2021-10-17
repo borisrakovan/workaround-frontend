@@ -12,10 +12,10 @@ import {
    ListItemText,
    List,
 } from "@mui/material"
-import { PropertyType } from "../types/generated"
+import { PropertyObjectType } from "../types/generated"
 
 interface Props {
-   property: PropertyType
+   property: PropertyObjectType
    loading?: boolean
    onClose?: () => void
 }

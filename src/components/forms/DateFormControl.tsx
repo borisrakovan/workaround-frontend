@@ -18,18 +18,22 @@ const DateFormControl = (props: Props) => {
    }
 
    return (
-      <div className="form-control">
-         <label className="mb-2 font-bold block">{label}</label>
-         <div className="flex items-center justify-between"></div>
-         <div className="flex items-center justify-between">
-            {!!selectedDate && dateToLocalFormat(selectedDate, false)}
-            <button
-               type="button"
-               className="btn-like-a"
-               onClick={() => setShowDatePicker(true)}
-            >
-               {!!selectedDate ? "Change" : "Choose"}
-            </button>
+      <div className="form-control relative  mb-2 ">
+         <div className=" ">
+            <div className="mr-2 mb-2">
+               <label className="font-bold block">{label}</label>
+               <div className="flex items-center justify-between"></div>
+            </div>
+            <div className="flex items-center ">
+               {!!selectedDate && dateToLocalFormat(selectedDate, false)}
+               <button
+                  type="button"
+                  className="btn-like-a ml-2"
+                  onClick={() => setShowDatePicker(true)}
+               >
+                  {!!selectedDate ? "Change" : "Choose"}
+               </button>
+            </div>
          </div>
          {showDatePicker && (
             <div className="pb-2 absolute top-12 z-50">
