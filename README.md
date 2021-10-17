@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Work Around Frontend
+
+This is a code repository of backend for Work Around project creating as solution of Hackprague 2021 Challenge. As a part of this solution [backend](https://github.com/osvalros/work-around-backend) this code base leverages.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
