@@ -1,5 +1,9 @@
 import { gql, useQuery } from "@apollo/client"
-import { FacilityTypeType, LifestyleTypeType, PropertyType } from "../types/generated"
+import {
+   FacilityTypeType,
+   LifestyleTypeType,
+   PropertyObjectType,
+} from "../types/generated"
 
 const PROPERTIES = gql`
    query closestProperties {
@@ -7,9 +11,20 @@ const PROPERTIES = gql`
          id
          user {
             id
+            firstName
+            lastName
          }
-         usdWorth
+         metersSquared
+         roomType
+         facilityTypes {
+            name
+         }
+         propertyType {
+            name
+         }
+         name
          photoId
+         description
          distance
          coordinates {
             x
@@ -50,7 +65,7 @@ const ROOM_TYPES = gql`
 `
 
 export const useProperties = () =>
-   useQuery<{ closestProperties: PropertyType[] }>(PROPERTIES)
+   useQuery<{ closestProperties: PropertyObjectType[] }>(PROPERTIES)
 
 export const useLifestyleTypes = () =>
    useQuery<{ lifestyleTypes: LifestyleTypeType[] }>(LIFESTYLE_TYPES)
