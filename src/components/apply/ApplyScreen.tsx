@@ -15,7 +15,7 @@ import { SelectOption } from "../../types"
 import { CityType, createApplicationArgs, UserType } from "../../types/generated"
 import CheckboxGroup from "./CheckboxGroup"
 import { useCreateApplication } from "../../graphql/mutations"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import LoadingSpinner from "../LoadingSpinner"
 import { deserializeTypeArray, serializeTypeArray } from "../../helpers"
 
@@ -44,7 +44,12 @@ const ApplyScreen = (props: Props) => {
    const { currentUser } = useAuthContext() as { currentUser: UserType }
    const [deadline, setDeadline] = useState<Date | null>(null)
 
-   const { mutate: createApplication, data, loading, error } = useCreateApplication()
+   const {
+      mutate: createApplication,
+      data,
+      loading,
+      error,
+   } = useCreateApplication({ userId: currentUser.id })
 
    const [cityPreferences, setCityPreferences] = useState<(CityType | null)[]>([
       null,
@@ -81,6 +86,7 @@ const ApplyScreen = (props: Props) => {
          ? currentUser.properties[0]
          : null
 
+   const history = useHistory()
    const handleSubmit = (values: any) => {
       if (!property) {
          return Promise.resolve()
@@ -102,6 +108,8 @@ const ApplyScreen = (props: Props) => {
       console.log(variables)
       createApplication({
          variables,
+      }).then(() => {
+         history.push("/my-recommendations")
       })
       return Promise.resolve()
    }

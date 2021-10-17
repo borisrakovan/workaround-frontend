@@ -12,7 +12,10 @@ import {
    PropertyObjectType,
    AcceptRecommendation,
    acceptRecommendationArgs,
+   deletePropertyArgs,
+   recommendedApplicationsArgs,
 } from "../types/generated"
+import { RECOMMENDATIONS } from "./queries"
 // import { ME_FIELDS } from "./fragments"
 
 export const useTypeSafeMutation = <TData, TVariables>(
@@ -38,9 +41,20 @@ export const LOGIN = gql`
                id
                user {
                   id
+                  firstName
+                  lastName
                }
-               usdWorth
+               metersSquared
+               roomType
+               facilityTypes {
+                  name
+               }
+               propertyType {
+                  name
+               }
+               name
                photoId
+               description
                distance
                coordinates {
                   x
@@ -138,28 +152,36 @@ const ACCEPT_RECOMMENDATION = gql`
    }
 `
 
+const DELETE_PROPERTY = gql`
+   mutation deleteProperty($propertyId: ID!) {
+      deleteProperty(propertyId: $propertyId) {
+         success
+      }
+   }
+`
+
+export const useDeleteProperty = () =>
+   useTypeSafeMutation<{ success: boolean }, deletePropertyArgs>(DELETE_PROPERTY)
+
 export const useAcceptRecommendation = () =>
    useTypeSafeMutation<AcceptRecommendation, acceptRecommendationArgs>(
       ACCEPT_RECOMMENDATION
    )
 
-export const useCreateApplication = () =>
+export const useCreateApplication = (refetchVariables: recommendedApplicationsArgs) =>
    useTypeSafeMutation<
       { success: boolean; createdApplication: ApplicationType },
       createApplicationArgs
-   >(
-      CREATE_APPLICATION
-      //    {
-      //    refetchQueries: [
-      //       {
-      //          query: EMPLOYEE_DETAIL,
-      //          variables: {
-      //             ...refetchVariables,
-      //          },
-      //       },
-      //    ],
-      // }
-   )
+   >(CREATE_APPLICATION, {
+      refetchQueries: [
+         {
+            query: RECOMMENDATIONS,
+            variables: {
+               ...refetchVariables,
+            },
+         },
+      ],
+   })
 
 export const useCreateProperty = () =>
    useTypeSafeMutation<

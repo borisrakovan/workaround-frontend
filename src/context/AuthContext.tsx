@@ -9,6 +9,7 @@ interface AuthContextType {
    userLoading: boolean
    login: (email: string, password: string, delay: number) => Promise<any>
    logout: () => void
+   refetchUser: () => void
 }
 
 const AuthContext = React.createContext<AuthContextType>({
@@ -17,6 +18,7 @@ const AuthContext = React.createContext<AuthContextType>({
    userLoading: true,
    login: () => Promise.reject(),
    logout: () => {},
+   refetchUser: () => {},
 })
 
 // Login context providing user object and it's setter
@@ -41,6 +43,20 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
          setUserLoading(false)
       })
 
+   const refetchUser = () => {
+      const user = currentUser as UserType
+      loginMutation({ variables: { email: user.email, password: "1234" } }).then(
+         ({ data }) => {
+            if (data?.login) {
+               setCurrentUser(data.login.me)
+            } else {
+               return Promise.reject("API response does not contain any user")
+            }
+            setUserLoading(false)
+         }
+      )
+   }
+
    const logout = () => setCurrentUser(null)
 
    // useEffect(() => {
@@ -51,7 +67,9 @@ const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
    // }, [])
 
    return (
-      <AuthContext.Provider value={{ currentUser, userLoading, login, logout }}>
+      <AuthContext.Provider
+         value={{ currentUser, userLoading, login, logout, refetchUser }}
+      >
          {children}
       </AuthContext.Provider>
    )

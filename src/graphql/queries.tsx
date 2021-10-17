@@ -40,7 +40,7 @@ const PROPERTIES = gql`
    }
 `
 
-const RECOMMENDATIONS = gql`
+export const RECOMMENDATIONS = gql`
    query recommendedApplications($userId: ID!) {
       recommendedApplications(userId: $userId) {
          id

@@ -9,9 +9,12 @@ import UserDropdownMenu from "./UserDropdownMenu"
 interface Props {}
 
 const Header = (props: Props) => {
-   const { currentUser, userLoading } = useAuthContext()
+   const { currentUser, userLoading, logout } = useAuthContext()
    const history = useHistory()
-   const handleLogout = () => history.push("/")
+   const handleLogout = () => {
+      logout()
+      history.push("/")
+   }
 
    return (
       <header className={`site-header z-10 py-3 flex items-center shadow w-full`}>
@@ -42,6 +45,9 @@ const Header = (props: Props) => {
                         </HeaderMenuItem>
                         <HeaderMenuItem linkTo="/my-property">
                            My property
+                        </HeaderMenuItem>
+                        <HeaderMenuItem linkTo="/apply" className="strong">
+                           Apply
                         </HeaderMenuItem>
                         <HeaderMenuSeparator />
                         <li className="inline-block px-3 mx-1 my-2">
